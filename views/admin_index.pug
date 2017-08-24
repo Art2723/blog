@@ -12,7 +12,8 @@ block content
             a(href='/admin/'+post.id+'/restore') Restore
           else
             a(href='/admin/'+post.id+'/delete') Delete
-      img.title_img(src=post.blog_post_img||config.default_img)
+      a(href=post.url_edit)
+        img.title_img(src=post.blog_post_img||config.default_img)
       h2(class='post-name') 
         a(href=post.url_edit) #{post.blog_post_name} 
       span.post-content !{post.blog_post}

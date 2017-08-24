@@ -38,7 +38,7 @@ exports.tagged_posts = function(req, res, next) {
         // if page param undifined then equal 0 or it can be 2,3 and so on (-1 used to make 1,2 and so on)
       {list_posts=list_posts.splice((req.query.page?(req.query.page-1):0)*config.view.posts_on_page, config.view.posts_on_page);};
       //Successful, so render
-            res.render('index', {config:config.view,  title: req.params.id, posts_list: list_posts, page:req.query.page, pages:pages, tag:req.params.id});
+      res.render('index', {config:config.view,  title: req.params.id, posts_list: list_posts, page:req.query.page, pages:pages, tag:req.params.id});
     });
 };
 
@@ -234,8 +234,6 @@ exports.admin_tagged_posts = function(req, res, next) {
     });
 };
 
-
-
 //---------------------
 // Display admin login GET
 exports.admin_signup_get = function(req, res, next) {
@@ -265,6 +263,46 @@ exports.admin_signup_post = function(req, res, next) {
 };
 //--------------------------
 
+// tags
+exports.all_tags = function(req, res, next) {
+  Blog.find({deleted:false}, 'tags_post')
+    .exec(function (err, list_posts) {
+      if (err) {return next(err)};
+      var arr=[];
+      for (var i=0; i<list_posts.length; i++) {
+          arr=arr.concat(list_posts[i].tags_post.trim().slice(1).split('#'));
+      };
+      var obj = {};
+      for (var i = 0; i < arr.length; i++) {
+        var str = arr[i];
+        obj[str] = true; // запомнить строку в виде свойства объекта
+      };
+      arr= Object.keys(obj); 
+      res.render('all_tags', {config:config.view, title: 'all_tags', tags_list:arr});
+    });
+    
+};
+
+exports.admin_all_tags = function(req, res, next) {
+  Blog.find({deleted:false}, 'tags_post')
+    .exec(function (err, list_posts) {
+      if (err) {return next(err)};
+      var arr=[];
+      for (var i=0; i<list_posts.length; i++) {
+          arr=arr.concat(list_posts[i].tags_post.trim().slice(1).split('#'));
+      };
+      var obj = {};
+      for (var i = 0; i < arr.length; i++) {
+        var str = arr[i];
+        obj[str] = true; // запомнить строку в виде свойства объекта
+      };
+      arr= Object.keys(obj); 
+      res.render('admin_all_tags', {config:config.view, title: 'all_tags', tags_list:arr});
+    });
+    
+};
+
+// temp object for preview fields
 var preview = {};
 
 

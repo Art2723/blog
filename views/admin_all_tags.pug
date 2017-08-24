@@ -1,0 +1,9 @@
+extends admin_layout
+
+block content
+  each tag in tags_list
+    span.tag_cloud 
+      a(href='/admin/'+tag) #{tag}
+
+
+

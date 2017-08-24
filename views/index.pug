@@ -4,7 +4,8 @@ block content
   ul(class='post')
   each post in posts_list
     li 
-      img.title_img(src=post.blog_post_img||config.default_img)
+      a(href=post.url) 
+        img.title_img(src=post.blog_post_img||config.default_img)
       h2(class='post-name') 
         a(href=post.url) #{post.blog_post_name} 
       span.post-content !{post.blog_post}
