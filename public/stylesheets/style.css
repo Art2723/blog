@@ -1,0 +1,271 @@
+/* -----------------reset browser styles------------------------- */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1.2;
+}
+ol { 
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+ul {
+  padding-left: 1.4em;
+  list-style: square;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} 
+/* -----------------------end reset browser styles -------------------*/
+
+/* ------------------------------FONTS-------------------------------- */
+
+body {
+  font-size: 16px;
+}
+
+.logo {
+  font-family: Helvetica;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.header-nav {
+    font-family: Helvetica;
+}
+
+.header-nav a {
+    font-size: 100%;
+}
+
+.main-content, .form-group, .btn {
+  font-family: Arial;
+}
+
+.footer {
+  font-family: Helvetica;
+}
+.post-tags, .post-date {
+  font-size: 80%;
+}
+
+.edit-nav {
+  font-size: 80%;
+  font-style: italic;
+}
+
+/* -----------------------------end of FONTS --------------------------*/
+
+/* ----------------------------COLORS & STYLES------------------------ */
+
+body {
+  background-color: #fff;
+}
+
+.header-nav {
+    list-style: none;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.header {
+    background-color: #e0e2e5;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+
+}
+
+.main-content a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.main-content li{
+    list-style-type: none;
+}
+
+.footer {
+    background-color: #e0e2e5;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+.selected {
+    border-bottom: 1px solid;
+}
+
+
+/* ------------------------------end of COLORS ------------------------*/
+
+
+
+/* -------------------------Elements sizes & positions -----------------*/
+html, body {
+	min-width: 200px;
+  max-width: 1200px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height:100%;
+}
+
+
+.container {
+    min-height:100%;
+    position: relative;
+}
+
+.header {
+  display: block;
+  padding-bottom: 20px;
+  padding-left: calc(50vw - 50%);
+}
+
+.logo {
+  float: left;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 0px;
+  padding: 0;
+}
+
+.header-nav {
+    display:inline-block;
+    margin-top: 30px;
+    margin-left: 10%;
+    padding: 0;
+
+}
+
+.header-nav li {
+    display: inline;
+    margin-right: 30px;
+}
+
+.main-content {
+      padding-left: 30px;
+      padding-bottom: 50px;
+}
+
+.main-content li{
+    list-style-type: none;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.post-name h2 {
+}
+
+.post-content {
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 150px;
+  text-overflow: ellipsis;
+}
+
+.post-tags, .post-date {
+    display: block;
+    clear: both;
+}
+
+.title_img {
+  height: 150px;
+  float: left;
+  margin: 5px 10px 10px 0px;
+}
+
+.footer {
+    display: block;
+    height: 70px;
+    position: absolute;
+    bottom: 0;
+}
+
+span .prev , span .next {
+  margin-right: auto;
+  display:inline-block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.prev {
+  float:left;
+  margin-left: 33%;
+
+}
+
+.next {
+  float:right;
+  margin-right: 33%;
+}
+
+.form-group {
+  margin: 20px 0;
+}
+
+.form-control {
+  margin-left: 10px;
+  width:80%;
+}
+
+ul.edit-nav {
+  padding-left: 0;
+}
+
+.edit-nav li{
+    list-style-type: none;
+    display: inline-block;
+    padding: 10px 10px 0 0;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  margin-right: 5px;
+}
+
+label.checkbox {
+  display: block;
+  margin-top: 20px;
+}
+
+/* ----------------------end of Elements sizes & positions ----------------*/
+
+/* ----------------------------------Animation -----------------------------*/
+
+a {
+    border-bottom: 1px solid transparent;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+a:hover {
+    border-bottom: 1px solid;
+}
+
+.logo a:hover {
+    border-bottom: 1px solid transparent;
+}
+
+/* ------------------------------end of Animation ----------------------------*/

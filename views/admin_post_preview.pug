@@ -1,0 +1,14 @@
+extends admin_layout
+
+block content
+
+
+  img.title_img(src=blog_post_img||config.default_img)
+  h1= blog_post_name 
+  p !{blog_post}
+  span.post-tags tags: #{tags_post}
+  span.post-date date: #{date_of_creation_formatted}
+  span.post-date last edited: #{date_of_last_edit_formatted}
+      
+
+  a.btn(href="javascript:window.history.back()" type='button') Back

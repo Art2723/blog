@@ -1,0 +1,38 @@
+extends admin_layout
+
+block content
+  h1= title
+
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') name:
+      input.form-control(type='text', placeholder='Noname' name='name' required='true' value = name)
+
+    div.form-group
+      label(for='img') image:
+      input.form-control(type='text', placeholder='URL' name='img' value = img)
+
+    div.form-group
+      label(for='post') post:
+      textarea.form-control(type='text', placeholder='Empty' name='post' required='true' rows='30')=post
+
+    div.form-group
+      label(for='tags') tags:
+      input.form-control(type='text', placeholder='#blog' name='tags' required='true' value = tags)
+    
+    div.form-group
+      label(for='date') date:
+      input.form-control(type='text', placeholder='#blog' name='date' readonly="readonly" value = date)
+    label.checkbox
+      input.checkbox(type='checkbox', name='check_deleted', checked = deleted, value = 1)
+      span.checkbox-description Deleted
+    
+    button.btn(type='submit' name='submit' value ='Ok') Save
+    button.btn(type='submit' name ='submit' value ='Preview') Preview
+    button.btn(type='submit' name ='submit' value ='Cancel') Cancel
+    if errors 
+      ul
+        for error in errors
+          li!= error.msg
+

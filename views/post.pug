@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= post.blog_post_name 
+  img.title_img(src=post.blog_post_img||config.default_img)
+  p !{post.blog_post}
+  span.post-tags tags: #{post.tags_post}
+  span.post-date date: #{post.date_of_creation_formatted}
+  if post.date_of_last_edit
+    span.post-date last edited: #{post.date_of_last_edit_formatted}
+      

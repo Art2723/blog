@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class='container')
+        div(class='header')
+          div.logo 
+            a(href='/') #{config.blog_name}
+          block header
+            ul(class='header-nav')
+              each item in config.menu_items
+                li 
+                  if title == item
+                    a.selected(href='/'+item) #{item}
+                  else 
+                    a(href='/'+ item) #{item}
+        div(class='main-content')
+          block content
+        div(class='footer')
+          if tag
+            if pages>1 
+              if !page ||page==1
+                span(class='next')
+                  a.next(href='/'+tag+'/?page='+2) next
+              else if page == pages
+                span(class='prev')
+                  a.prev(href='/'+tag+'/?page='+(+page-1)) prev
+              else
+                span(class='prev')
+                  a.prev(href='/'+tag+'/?page='+(+page-1)) prev 
+                span(class='next')
+                  a.next(href='/'+tag+'/?page='+(+page+1)) next
+          else
+            if pages>1 
+              if !page ||page==1
+                span(class='next')
+                  a.next(href='/?page='+2) next
+              else if page == pages
+                span(class='prev')
+                  a.prev(href='/?page='+(+page-1)) prev
+              else
+                span(class='prev')
+                  a.prev(href='/?page='+(+page-1)) prev
+                span(class='next')
+                  a.next(href='/?page='+(+page+1)) next
+

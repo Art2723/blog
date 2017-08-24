@@ -1,0 +1,12 @@
+{
+	"mongodb":"mongodb://blogtest:blogtest1@ds139342.mlab.com:39342/blogtest",
+	"view": {
+					"blog_name":"My Blog",
+					"posts_on_page": "3",
+					"default_img":"/img/pen.jpg",
+					"menu_items":["all", "about", "books", "fun", "blog"]
+	}
+
+}
+
+
