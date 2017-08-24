@@ -1,11 +1,9 @@
 var Blog = require('../models/blog_model');
-var app = require('../app');
 var config = require('../config');
 var express = require('express');
 var router = express.Router();
 var Account = require('../models/account');
 var passport = require('passport');
-var async = require('async');
 var marked = require('marked');
 var moment = require('moment');
 
@@ -36,12 +34,10 @@ exports.tagged_posts = function(req, res, next) {
     .exec(function (err, list_posts) {
       if (err) { return next(err); }
       var pages = Math.ceil(list_posts.length/config.view.posts_on_page);//how many pages
-       //console.log(list_posts);
       if (list_posts.length>config.view.posts_on_page) 
         // if page param undifined then equal 0 or it can be 2,3 and so on (-1 used to make 1,2 and so on)
       {list_posts=list_posts.splice((req.query.page?(req.query.page-1):0)*config.view.posts_on_page, config.view.posts_on_page);};
       //Successful, so render
-      //console.log(req.query.page?(req.query.page-1):0);
             res.render('index', {config:config.view,  title: req.params.id, posts_list: list_posts, page:req.query.page, pages:pages, tag:req.params.id});
     });
 };
@@ -80,13 +76,15 @@ exports.post_create_post = function(req, res, next) {
         if (err) return next(err);
         res.redirect('/admin/all');     
         }); 
-  } else {
+  } else if (req.body.submit =='Preview'){
         preview.blog_post_name = req.body.name;
         preview.blog_post_img= req.body.img;
         preview.blog_post= marked(req.body.post);
         preview.tags_post= req.body.tags;
         preview.date_of_creation= moment(new Date()).format('MMMM Do, YYYY');
         res.redirect('/admin/'+req.params.id+'/preview'); 
+  } else {
+        res.redirect('/admin/all');     
   }
 };
 
@@ -120,7 +118,6 @@ exports.post_update_get = function(req, res, next) {
     .exec(function(err, post) {
       if (err) return next(err); 
       //Successful, so render
-      //res.render('post', {post: post} );
       res.render('admin_create', {config:config.view,  title: 'Edit', name: post.blog_post_name, post: post.blog_post_marked, tags: post.tags_post, img:post.blog_post_img, deleted:post.deleted, date:post.date_of_creation_formatted });
      });
 };
@@ -159,11 +156,6 @@ exports.post_update_post = function(req, res, next) {
 
 // Display post update form on GET
 exports.post_preview_get = function(req, res, next) {
-  //  Blog.findById(req.params.id)
-    //.exec(function(err, post) {
-     // if (err) return next(err); 
-      //Successful, so render
-      //res.render('post', {post: post} );
       res.render('admin_post_preview', {config:config.view,  title: 'Preview', 
         blog_post_name: preview.blog_post_name,
         blog_post_img: preview.blog_post_img,
@@ -175,24 +167,6 @@ exports.post_preview_get = function(req, res, next) {
      });
    // })
  };
-
-// // Handle post update on POST
-// exports.post_preview_post = function(req, res, next) {
-//   Blog.findById(req.params.id, function (err, post) {
-//       if (err) return next(err);
-//       post.blog_post_name= req.body.name;
-//       post.blog_post_img= req.body.img;
-//       post.blog_post_marked = req.body.post,
-//       post.blog_post= marked(req.body.post);
-//       post.tags_post= req.body.tags;
-//       post.date_of_creation= '2017-01-01';
-//       post.save(function (err, cb) {
-//       if (err) return next(err);
-//       res.redirect('/admin/main');     
-//       }); 
-//   });
-// };
-
 
 // Display admin login GET
 exports.admin_get = function(req, res, next) {
@@ -214,7 +188,6 @@ exports.post_admin_get = function(req, res, next) {
         if (err) return next(err);
       }).exec(function (err, post) {
       //Successful, so render
-       // this (~post.tags_post.indexOf('#deleted')) checks if post marked as deleted 
         res.render('admin_post', {config:config.view,  post: post, id: req.params.id, deleted: post.deleted })
       });
 };
@@ -233,11 +206,9 @@ exports.admin_main = function(req, res, next) {
       .exec(function (err, list_posts) {
       if (err) { return next(err); }
       var pages = Math.ceil(list_posts.length/config.view.posts_on_page);//how many pages
-       //console.log(list_posts);
       if (list_posts.length>config.view.posts_on_page) 
         // if page param undifined then equal 0 or it can be 2,3 and so on (-1 used to make 1,2 and so on)
       {list_posts=list_posts.splice((req.query.page?(req.query.page-1):0)*config.view.posts_on_page, config.view.posts_on_page);};
-      //Successful, so render
       //Successful, so render
       res.render('admin_index', {config:config.view,  title: 'Admin panel', posts_list: list_posts, page:req.query.page, pages:pages});
     })
@@ -254,12 +225,11 @@ exports.admin_tagged_posts = function(req, res, next) {
     .exec(function (err, list_posts) {
       if (err) { return next(err); }
       var pages = Math.ceil(list_posts.length/config.view.posts_on_page);//how many pages
-       //console.log(list_posts);
+
       if (list_posts.length>config.view.posts_on_page) 
         // if page param undifined then equal 0 or it can be 2,3 and so on (-1 used to make 1,2 and so on)
       {list_posts=list_posts.splice((req.query.page?(req.query.page-1):0)*config.view.posts_on_page, config.view.posts_on_page);};
       //Successful, so render
-      //console.log(req.query.page?(req.query.page-1):0);
             res.render('admin_index', {config:config.view,  title: req.params.id, posts_list: list_posts, page:req.query.page, pages:pages, tag:req.params.id});
     });
 };
@@ -269,7 +239,11 @@ exports.admin_tagged_posts = function(req, res, next) {
 //---------------------
 // Display admin login GET
 exports.admin_signup_get = function(req, res, next) {
+  if (config.dev=="true") {
     res.render('admin_login', {config:config.view, title: 'Signup' })
+  } else {
+    res.redirect('/');
+  };
 };
 
 // Handle admin login POST
@@ -292,14 +266,5 @@ exports.admin_signup_post = function(req, res, next) {
 //--------------------------
 
 var preview = {};
-  // {
-  //   blog_post_name: {type: String, required:true, max:100},
-  //   blog_post_img: {type: String},
-  //   blog_post: {type: String, required: true},
-  //   blog_post_marked: {type: String, required: true},
-  //   tags_post: {type: String, required: true, max: 100},
-  //   date_of_creation: {type: Date, required: true},
-  //   date_of_last_edit: {type: Date},
-  // };
 
 

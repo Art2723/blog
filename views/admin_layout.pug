@@ -8,7 +8,8 @@ html(lang='en')
   body
     div(class='container')
         div(class='header')
-          div.logo #{config.blog_name}
+          div.logo 
+            a(href='/') #{config.blog_name}
           block header
             ul(class='header-nav')
               li 
@@ -29,27 +30,27 @@ html(lang='en')
             if pages>1 
               if !page ||page==1
                 span(class='next')
-                  a.next(href='/admin/'+tag+'/?page='+2) next
+                  a.next(href='/admin/'+tag+'?page='+2) next
               else if page == pages
                 span(class='prev')
-                  a.prev(href='/admin/'+tag+'/?page='+(+page-1)) prev
+                  a.prev(href='/admin/'+tag+'?page='+(+page-1)) prev
               else
                 span(class='prev')
-                  a.prev(href='/admin/'+tag+'/?page='+(+page-1)) prev 
+                  a.prev(href='/admin/'+tag+'?page='+(+page-1)) prev 
                 span(class='next')
-                  a.next(href='/admin/'+tag+'/?page='+(+page+1)) next
+                  a.next(href='/admin/'+tag+'?page='+(+page+1)) next
           else
             if pages>1 
               if !page ||page==1
                 span(class='next')
-                  a.next(href='/admin/all/?page='+2) next
+                  a.next(href='/admin/all?page='+2) next
               else if page == pages
                 span(class='prev')
-                  a.prev(href='/admin/all/?page='+(+page-1)) prev
+                  a.prev(href='/admin/all?page='+(+page-1)) prev
               else
                 span(class='prev')
-                  a.prev(href='/admin/all/?page='+(+page-1)) prev
+                  a.prev(href='/admin/all?page='+(+page-1)) prev
                 span(class='next')
-                  a.next(href='/admin/all/?page='+(+page+1)) next
+                  a.next(href='/admin/all?page='+(+page+1)) next
 
 

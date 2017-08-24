@@ -5,8 +5,8 @@
 					"posts_on_page": "3",
 					"default_img":"/img/pen.jpg",
 					"menu_items":["all", "about", "books", "fun", "blog"]
-	}
-
+	},
+	"dev":"true"
 }
 
 

@@ -25,26 +25,26 @@ html(lang='en')
             if pages>1 
               if !page ||page==1
                 span(class='next')
-                  a.next(href='/'+tag+'/?page='+2) next
+                  a.next(href='/'+tag+'?page='+2) next
               else if page == pages
                 span(class='prev')
-                  a.prev(href='/'+tag+'/?page='+(+page-1)) prev
+                  a.prev(href='/'+tag+'?page='+(+page-1)) prev
               else
                 span(class='prev')
-                  a.prev(href='/'+tag+'/?page='+(+page-1)) prev 
+                  a.prev(href='/'+tag+'?page='+(+page-1)) prev 
                 span(class='next')
-                  a.next(href='/'+tag+'/?page='+(+page+1)) next
+                  a.next(href='/'+tag+'?page='+(+page+1)) next
           else
             if pages>1 
               if !page ||page==1
                 span(class='next')
-                  a.next(href='/?page='+2) next
+                  a.next(href='?page='+2) next
               else if page == pages
                 span(class='prev')
-                  a.prev(href='/?page='+(+page-1)) prev
+                  a.prev(href='?page='+(+page-1)) prev
               else
                 span(class='prev')
-                  a.prev(href='/?page='+(+page-1)) prev
+                  a.prev(href='?page='+(+page-1)) prev
                 span(class='next')
-                  a.next(href='/?page='+(+page+1)) next
+                  a.next(href='?page='+(+page+1)) next
 

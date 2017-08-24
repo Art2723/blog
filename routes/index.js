@@ -35,10 +35,6 @@ router.post('/admin/:id/update', blog_controller.post_update_post);
 /* GET request to update post. */
 router.get('/admin/:id/preview', blog_controller.post_preview_get);
 
-// // POST request to update post
-// router.post('/admin/:id/preview', blog_controller.post_preview_post);
-
-
 /* GET request for one post. */
 router.get('/admin/all/:id', blog_controller.post_admin_get);
 
@@ -51,10 +47,10 @@ router.get('/login', blog_controller.admin_get);
 // POST request to admin login
 router.post('/login', blog_controller.admin_post);
 
-// GET request to admin login
+// GET request to admin signup
 router.get('/signup', blog_controller.admin_signup_get);
 
-// POST request to admin login
+// POST request to admin signup
 router.post('/signup', blog_controller.admin_signup_post);
 
 /* GET request for one post. */
