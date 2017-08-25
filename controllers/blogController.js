@@ -9,7 +9,7 @@ var moment = require('moment');
 
 // Display all posts
 exports.blog = function(req, res, next) {
-  Blog.find({deleted:false}, 'blog_post_name blog_post_img blog_post_marked blog_post tags_post date_of_creation date_of_creation_formatted date_of_last_edit date_of_last_edit_formatted')
+  Blog.find({deleted:false})
     .sort({date_of_creation: -1})
     .exec(function (err, list_posts) {
       if (err) return next(err);
@@ -27,9 +27,7 @@ exports.blog = function(req, res, next) {
 exports.tagged_posts = function(req, res, next) {
     Blog.find(
       //{tags_list:req.params.id},
-      {tags_post:{"$regex":"#"+req.params.id+'(#|$| )+'}, deleted:false
-    }, 
-    'blog_post_name blog_post_img blog_post tags_post date_of_creation date_of_creation_formatted date_of_last_edit date_of_last_edit_formatted')
+      {tags_post:{"$regex":"#"+req.params.id+'(#|$| )+'}, deleted:false})
     .sort({date_of_creation: -1})
     .exec(function (err, list_posts) {
       if (err) { return next(err); }
@@ -177,10 +175,9 @@ exports.admin_get = function(req, res, next) {
 exports.admin_post = function(req, res, next) {
   passport.authenticate('local',{
             successRedirect : '/admin/all', // redirect to the secure profile section
-            failureRedirect : '/', // redirect back to the signup page if there is an error
+            failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         })(req, res, next);
-  //res.redirect('/');
 };
 
 exports.post_admin_get = function(req, res, next) {
@@ -201,7 +198,7 @@ exports.admin_logout = function(req, res) {
 
 // Display admin main
 exports.admin_main = function(req, res, next) {
-      Blog.find({}, 'blog_post_name blog_post_img blog_post tags_post date_of_creation date_of_last_edit deleted')
+      Blog.find({})
       .sort({date_of_creation: -1})
       .exec(function (err, list_posts) {
       if (err) { return next(err); }
@@ -218,9 +215,7 @@ exports.admin_main = function(req, res, next) {
 exports.admin_tagged_posts = function(req, res, next) {
     Blog.find(
       //{tags_list:req.params.id},
-      {tags_post:{"$regex":"#"+req.params.id+'(#|$| )+'}
-    }, 
-    'blog_post_name blog_post_img blog_post tags_post date_of_creation date_of_last_edit deleted')
+      {tags_post:{"$regex":"#"+req.params.id+'(#|$| )+'}})
     .sort({date_of_creation: -1})
     .exec(function (err, list_posts) {
       if (err) { return next(err); }
@@ -237,33 +232,32 @@ exports.admin_tagged_posts = function(req, res, next) {
 //---------------------
 // Display admin login GET
 exports.admin_signup_get = function(req, res, next) {
-  if (config.dev=="true") {
-    res.render('admin_login', {config:config.view, title: 'Signup' })
-  } else {
-    res.redirect('/');
-  };
+    res.render('admin_signup', {config:config.view, title: 'Change Password/Login' })
 };
 
 // Handle admin login POST
 exports.admin_signup_post = function(req, res, next) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
-        if (err) {
-          return res.render('admin-login', { error : err.message });
-        }
-
-        passport.authenticate('local')(req, res, () => {
-            req.session.save((err) => {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/');
-            });
-        });
+   Account.find({}).remove().exec(function (err){ // we find all accounts (must be only one but who knows? lets delete em all) delete and make new one
+     if (err) return next(err);
+     Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+          if (err) {
+            return res.render('admin-login', { error : err.message });
+          }
+          passport.authenticate('local')(req, res, () => {
+              req.session.save((err) => {
+                  if (err) {
+                      return next(err);
+                  }
+              });
+          });
+        res.redirect('/');     
     });
+  })
 };
+
 //--------------------------
 
-// tags
+// tags with fast method to make uniq elements via obj
 exports.all_tags = function(req, res, next) {
   Blog.find({deleted:false}, 'tags_post')
     .exec(function (err, list_posts) {
@@ -275,7 +269,7 @@ exports.all_tags = function(req, res, next) {
       var obj = {};
       for (var i = 0; i < arr.length; i++) {
         var str = arr[i];
-        obj[str] = true; // запомнить строку в виде свойства объекта
+        obj[str] = true; // save string as obj
       };
       arr= Object.keys(obj); 
       res.render('all_tags', {config:config.view, title: 'all_tags', tags_list:arr});
@@ -294,7 +288,7 @@ exports.admin_all_tags = function(req, res, next) {
       var obj = {};
       for (var i = 0; i < arr.length; i++) {
         var str = arr[i];
-        obj[str] = true; // запомнить строку в виде свойства объекта
+        obj[str] = true; // save string as obj
       };
       arr= Object.keys(obj); 
       res.render('admin_all_tags', {config:config.view, title: 'all_tags', tags_list:arr});

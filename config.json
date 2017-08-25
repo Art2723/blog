@@ -6,7 +6,7 @@
 					"default_img":"/img/pen.jpg",
 					"menu_items":["all", "about", "books", "fun", "blog", "all_tags"]
 	},
-	"dev":"true"
+	"dev":"developer"
 }
 
 

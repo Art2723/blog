@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 //  try to be secure 
-app.use(helmet());
+//app.use(helmet());
 app.disable('x-powered-by');
 
 
@@ -33,9 +33,10 @@ app.use(flash());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 // everything in /admin route must be authorized
 app.use('/admin', isLoggedIn);
+
+app.use('/', routes);
 
 // passport
 var Account = require('./models/account');
@@ -49,6 +50,17 @@ mongoose.connect(mongoDB);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// first time run makes admin login/password admin/admin
+Account.find().exec(function (err, list) { 
+  if(list.length==0){
+    Account.register(new Account({ username : 'admin' }), 'admin', (err, account) => {
+        if (err) {
+          return err;}
+        })
+  
+  }});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -59,8 +71,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  //res.locals.message = err.message;
-  //res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
 // render the error page
   res.status(err.status || 500);

@@ -40,6 +40,12 @@ router.get('/admin/all/:id', blog_controller.post_admin_get);
 
 router.get('/admin/all_tags', blog_controller.admin_all_tags);
 
+// GET request to admin signup
+router.get('/admin/signup', blog_controller.admin_signup_get);
+
+// POST request to admin signup
+router.post('/admin/signup', blog_controller.admin_signup_post);
+
 /* GET request for tagged list. */
 router.get('/admin/:id', blog_controller.admin_tagged_posts);
 
@@ -49,12 +55,6 @@ router.get('/login', blog_controller.admin_get);
 
 // POST request to admin login
 router.post('/login', blog_controller.admin_post);
-
-// GET request to admin signup
-router.get('/signup', blog_controller.admin_signup_get);
-
-// POST request to admin signup
-router.post('/signup', blog_controller.admin_signup_post);
 
 router.get('/all_tags', blog_controller.all_tags);
 
