@@ -4,7 +4,8 @@
 					"blog_name":"My Blog",
 					"posts_on_page": "3",
 					"default_img":"/img/pen.jpg",
-					"menu_items":["all", "about", "books", "fun", "blog", "all_tags"]
+					"menu_items":["all", "about", "books", "fun", "blog", "all_tags"],
+					"style":"/stylesheets/style.css"
 	},
 	"dev":"developer"
 }

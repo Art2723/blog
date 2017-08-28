@@ -13,6 +13,9 @@
 - сделать мануал
 - выложить в боевом режиме на digital ocean
 
+запуск в боевом режиме
+NODE_ENV=production node bin/www
+
 
 next ver
 - сделать поиск по сайту 
