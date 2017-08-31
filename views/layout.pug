@@ -6,9 +6,10 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href=config.style)
   body
-    script document.body.className = ' fade-out';
-    script window.onload=function(){document.body.className=''};
-    script window.onbeforeunload=function() {document.body.className=' fade-in'}; 
+    // uncomment this is for fade in/out effect when reload the page
+    //script document.body.className = ' fade-out';
+    //script window.onload=function(){document.body.className=''};
+    //script window.onbeforeunload=function() {document.body.className=' fade-in'}; 
     div(class='container')
         div(class='header')
           div.logo 
@@ -50,4 +51,6 @@ html(lang='en')
                   a.prev(href='?page='+(+page-1)) prev
                 span(class='next')
                   a.next(href='?page='+(+page+1)) next
+    //this is for disqus comments, register on disqus and cjange the src accordingly
+    <script id="dsq-count-scr" src="//YOUR_DISQUS_SITE.disqus.com/count.js" async></script> 
 

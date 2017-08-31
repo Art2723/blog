@@ -13,5 +13,9 @@ block content
       span.post-date date: #{post.date_of_creation_formatted}
       if post.date_of_last_edit
         span.post-date last edited: #{post.date_of_last_edit_formatted}
+      // disqus comments counter
+      a.comment(href=post.url+'#disqus_thread') 
+
+
 
 

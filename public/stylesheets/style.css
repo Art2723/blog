@@ -64,7 +64,9 @@ body {
   font-size: 80%;
   font-style: italic;
 }
-
+.comment {
+  font-size: 80%;
+}
 /* -----------------------------end of FONTS --------------------------*/
 
 /* ----------------------------COLORS & STYLES------------------------ */
@@ -264,6 +266,10 @@ label.checkbox {
   height: 50px;
   clear: both;
 }
+.comment {
+  float:right;  
+}
+
 /* ----------------------end of Elements sizes & positions ----------------*/
 
 /* ----------------------------------Animation -----------------------------*/

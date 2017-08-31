@@ -1,5 +1,5 @@
 {
-	"mongodb":"mongodb://blogtest:blogtest1@ds139342.mlab.com:39342/blogtest",
+	"mongodb":"mongodb://localhost/blogdb",
 	"view": {
 					"blog_name":"My Blog",
 					"posts_on_page": "3",

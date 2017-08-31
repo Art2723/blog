@@ -10,3 +10,20 @@ block content
     span.post-date last edited: #{post.date_of_last_edit_formatted}
       
   a.btn(href="javascript:window.history.back()" type='button') Back
+  
+  // this for disqus comments
+  #disqus_thread 
+      script.
+        var disqus_config = function () {
+        this.page.url = post.url;  
+        this.page.identifier = id; 
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        // enter your disqus site name
+        s.src = 'https://YOUR_DISQUS_SITE.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+
+       
