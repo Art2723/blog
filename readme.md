@@ -1,6 +1,6 @@
 # Simple Blog on node, express and mongodb
 
-Simple and easy to install node.js blog which allow markdown posts. 
+Simple and easy to install node.js blog which allows markdown posts. 
 
 ## Getting Started
 
@@ -26,4 +26,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Disclaimer
 
-This is my first real project in coding generally and on javascript/node.js in particular. I don't have any developer background. JS is my hobby and I've made this project because I didn't find free blog on Javascript/node.js (and of course for fun). I've used excellent tutorials on MDN and answers on stackoverflow. I'm sure many things are made wrong (not absolutely correct) and my code consists some unnecessary parts which haven’t been cleaned up after some experiments, but it works!!! :)
+This is my first real project in coding generally and on javascript/node.js in particular. I don't have any developer background. JS is my hobby and I've made this project because I haven't found any free blog on Javascript/node.js (and of course for fun). I've used excellent tutorials on MDN and answers on stackoverflow. I'm sure many things are made wrong (not absolutely correct) and my code consists some unnecessary parts which haven’t been cleaned up after some experiments, but it works!!! :)
